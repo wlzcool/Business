@@ -69,13 +69,13 @@
         $("#btnSignIn").click(function () {
             $.ajax({
                 type: 'POST',
-                url: '/home/login/LoginPost',
+                url: '__ROOT__/home/login/login',
                 timeout: 60 * 1000,
                 dataType: 'json',
                 data: {"email": $("#email").val(), "password": $("#password").val()},
                 success: function (result) {
                     if (result != null && result.State == 'Success') {
-                        location.href = "/home/index";
+                        location.href = "__ROOT__/home/index";
                     } else {
                         alert(result.ErrorMessage);
                     }
