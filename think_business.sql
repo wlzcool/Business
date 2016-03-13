@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2016-03-13 12:09:16
+Date: 2016-03-13 23:02:06
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -125,11 +125,12 @@ CREATE TABLE `bu_user` (
   `email` varchar(255) COLLATE utf8mb4_bin NOT NULL,
   `username` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
+  `roleId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- ----------------------------
 -- Records of bu_user
 -- ----------------------------
-INSERT INTO `bu_user` VALUES ('1', '34@qq.com', '123', '123');
-INSERT INTO `bu_user` VALUES ('2', '', null, null);
+INSERT INTO `bu_user` VALUES ('1', '34@qq.com', '123', '123', null);
+INSERT INTO `bu_user` VALUES ('2', '', null, null, null);
