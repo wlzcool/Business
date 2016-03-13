@@ -1,7 +1,13 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
-class ArticleController extends Controller {
+class ColumnController extends BaseController {
+    public function index(){
+        $this->display();
+    }
+    public function  getColumnList(){
+
+    }
     public function insert(){
         $Article =D('Article');
         if($Article->create()){

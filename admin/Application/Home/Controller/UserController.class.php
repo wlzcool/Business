@@ -9,18 +9,21 @@ namespace Home\Controller;
 
 use Think\Controller;
 
-class LoginController extends BaseController
+class UserController extends BaseController
 {
-    public function Login()
+    public function insert()
     {
         if (IS_GET) {
             $this->display();
         }else{
             $email = I("post.email");
+            $username = I("post.username");
             $password = I("post.password");
             $Model = M('User');
             $where['email'] = ':email';
+            $where['username']=':username';
             $where['password'] = ':password';
+
             $bind[':email'] = array($email, \PDO::PARAM_STR);
             $bind[':password'] = array($password, \PDO::PARAM_STR);
             $list = $Model->where($where)->bind($bind)->select();
@@ -32,26 +35,4 @@ class LoginController extends BaseController
         }
     }
 
-
-
-    public function Register()
-    {
-        if(IS_Get){
-            $this->display();
-        }else{
-            $email = I("post.email");
-            $password = I("post.password");
-            $User = M('User');
-            $data['email'] = ':email';
-            $data['password'] = ':password';
-            $bind[':email'] = array($email, \PDO::PARAM_STR);
-            $bind[':password'] = array($password, \PDO::PARAM_STR);
-            $result = $User->bind($bind)->add($data);
-            if ($result) {
-                $this->ajaxReturn(array("State" => "Success", "Message" => "注册成功"), "JSON");
-            } else {
-                $this->ajaxReturn(array("State" => "Error", "Message" => "注册失败"), "JSON");
-            }
-        }
-    }
 }
