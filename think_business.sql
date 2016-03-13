@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2016-03-12 23:06:28
+Date: 2016-03-13 12:09:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -36,6 +36,10 @@ CREATE TABLE `bu_column` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- ----------------------------
+-- Records of bu_column
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for bu_news
 -- ----------------------------
 DROP TABLE IF EXISTS `bu_news`;
@@ -59,6 +63,41 @@ CREATE TABLE `bu_news` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- ----------------------------
+-- Records of bu_news
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for bu_product
+-- ----------------------------
+DROP TABLE IF EXISTS `bu_product`;
+CREATE TABLE `bu_product` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(200) COLLATE utf8mb4_bin DEFAULT NULL,
+  `keywords` varchar(200) COLLATE utf8mb4_bin DEFAULT NULL,
+  `price` decimal(10,2) DEFAULT NULL,
+  `outUrl` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
+  `feature` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
+  `description` text COLLATE utf8mb4_bin,
+  `content` longtext COLLATE utf8mb4_bin,
+  `classId` int(11) DEFAULT NULL,
+  `orderNumber` int(11) DEFAULT NULL,
+  `imgurls` text COLLATE utf8mb4_bin,
+  `displayImg` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '列表显示用',
+  `hits` int(11) DEFAULT NULL,
+  `createUser` varchar(200) COLLATE utf8mb4_bin DEFAULT NULL,
+  `createTime` datetime DEFAULT NULL,
+  `updateUser` varchar(200) COLLATE utf8mb4_bin DEFAULT NULL,
+  `updateTime` datetime DEFAULT NULL,
+  `IsDelete` int(11) DEFAULT '0',
+  `IsTop` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+-- ----------------------------
+-- Records of bu_product
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for bu_tag
 -- ----------------------------
 DROP TABLE IF EXISTS `bu_tag`;
@@ -74,6 +113,10 @@ CREATE TABLE `bu_tag` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- ----------------------------
+-- Records of bu_tag
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for bu_user
 -- ----------------------------
 DROP TABLE IF EXISTS `bu_user`;
@@ -84,3 +127,9 @@ CREATE TABLE `bu_user` (
   `password` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+-- ----------------------------
+-- Records of bu_user
+-- ----------------------------
+INSERT INTO `bu_user` VALUES ('1', '34@qq.com', '123', '123');
+INSERT INTO `bu_user` VALUES ('2', '', null, null);
