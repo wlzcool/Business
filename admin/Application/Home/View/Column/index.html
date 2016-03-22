@@ -1,0 +1,124 @@
+<extend name="Common:base"/>
+<block name="style">
+    <link href="{$Think.config.WEB_RES_ROOT}css/jqPaginator.css" rel="stylesheet" type="text/css"/>
+</block>
+<block name="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <table class="table table-condensed tableColumn">
+                    <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>名称</th>
+                        <th>文件夹名称</th>
+                        <th>排序</th>
+                        <th>新窗口打开</th>
+                        <th>位置</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="columnList">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <table width="100%" border="1" cellspacing="0" class="table mag_top30" style="display: none">
+        <tbody id="columnTemplate">
+        <tr class="columnData" height="45" id="row{0}">
+            <td>{Key}</td>
+            <td>{1}</td>
+            <td>{2}</td>
+            <td>{3}</td>
+            <td>{4}</td>
+            <td>{5}</td>
+            <td>
+                <span class="btnEditable"><a href="EditAd?projId={Key}">编辑</a></span>
+                <span class="btnDisabled disableAd" data-id="{Key}">删除</span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div id="dividePage" class="pagination">
+    </div>
+
+</block>
+<block name="script">
+    <script src="{$Think.config.WEB_RES_ROOT}js/jqPaginator.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function(){
+            $('#dividePage').jqPaginator({
+                totalPages: 1,
+                visiblePages: 10,
+                currentPage: 1,
+                onPageChange: function(num, type) {
+                    searchData(num);
+                }
+            });
+            searchData(1);
+        });
+        // 检索数据
+        function searchData(page) {
+            var data = {
+                PageSize: 15,
+                CurrentPage: page
+            };
+            $.ajax({
+                async: true,
+                type: "POST",
+                url: "__ROOT__/home/Column/getColumnList",
+                cache: false,
+                timeout: 60 * 60 * 1000,
+                dataType: "json",
+                data: data,
+                success: function(result) {
+                    $("#columnList .columnData").remove();
+                    if (result.Data != null && result.Data.length == 0) {
+                        $("#columnList").append('<tr class="columnData" height="45"><td colspan="10">没有符合您查询条件的结果</td></tr>');
+                        $('#dividePage').jqPaginator('option', {
+                            totalPages: result.pageCount
+                        });
+                    }
+                    if (result != null && result.State === "Success") {
+                        $('#dividePage').jqPaginator('option', {
+                            totalPages: result.PageCount
+                        });
+                        if (result.Data != null) {
+                            for (var i = 0; i < result.Data.length; i++) {
+                                var row = result.Data[i];
+                                var rowHtml = $("#columnTemplate").html();
+                                rowHtml = rowHtml.replace("{0}", row.id);
+                                rowHtml = rowHtml.replace("{1}", row.name);
+                                rowHtml = rowHtml.replace("{2}", row.foldname);
+                                rowHtml = rowHtml.replace("{3}", row.ordernumber);
+                                rowHtml = rowHtml.replace("{4}", row.newwindow);
+                                rowHtml = rowHtml.replace("{5}", row.position);
+                                rowHtml = rowHtml.replace(/{Key}/g, row.id);
+                                $("#columnList").append($(rowHtml));
+                            }
+                        }
+                        /*【编辑】*/
+                        $("#columnList .disableAd").click(function(event) {
+                            var _this = $(this);
+                            var key = _this.data("id");
+                            if (_this.text() != "已作废") {
+                                if (confirm("确定要将序号为" + key + "的数据变为作废吗？被作废的活动不可再恢复，请谨慎操作。")) {
+                                    $.post('/goldeneye/Advert/DeleteAd', { id: key }, function(result) {
+                                        if (result != null && result.state == '@SlStandardMessage.Success') {
+                                            alert(result.message);
+                                        } else {
+                                            alert(result.message);
+                                        }
+                                    });
+                                    searchData(1);
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        }
+    </script>
+</block>

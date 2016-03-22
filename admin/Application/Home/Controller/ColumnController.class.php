@@ -8,10 +8,10 @@ class ColumnController extends BaseController {
     public function  getColumnList(){
         $column =M('Column');
         $where['page']=':page';
-        $bind[':page']=array(I('post.page'),\PDO::PARAM_INT);
+        $bind[':page']=array(I('post.CurrentPage'),\PDO::PARAM_INT);
         $list = $column->limit(15)->page($where)->bind($bind)->select();
-        $count=$column->count();
-        $this->ajaxReturn(array("State" => "Success", "Message" => "成功获取模块","Data"=>$list,"Count"=>$count), "JSON");
+        $count=$column->count()/15+1;
+        $this->ajaxReturn(array("State" => "Success", "Message" => "成功获取模块","Data"=>$list,"PageCount"=>intval($count)), "JSON");
     }
     public function insertColumn(){
         if(!IS_POST){

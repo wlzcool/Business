@@ -23,6 +23,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     -->
     <link href="{$Think.config.WEB_RES_ROOT}dist/css/skins/skin-blue.min.css" rel="stylesheet" type="text/css"/>
 
+    <block name="style"></block>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -30,26 +31,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 </head>
-<!--
-BODY TAG OPTIONS:
-=================
-Apply one or more of the following classes to get the
-desired effect
-|---------------------------------------------------------|
-| SKINS         | skin-blue                               |
-|               | skin-black                              |
-|               | skin-purple                             |
-|               | skin-yellow                             |
-|               | skin-red                                |
-|               | skin-green                              |
-|---------------------------------------------------------|
-|LAYOUT OPTIONS | fixed                                   |
-|               | layout-boxed                            |
-|               | layout-top-nav                          |
-|               | sidebar-collapse                        |
-|---------------------------------------------------------|
 
--->
 <body class="skin-blue">
 <div class="wrapper">
     <include file="Common/header"/>
@@ -94,5 +76,6 @@ desired effect
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
       Both of these plugins are recommended to enhance the
       user experience -->
+<block name="script"></block>
 </body>
 </html>
