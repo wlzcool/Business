@@ -3,9 +3,12 @@
     <link href="{$Think.config.WEB_RES_ROOT}css/jqPaginator.css" rel="stylesheet" type="text/css"/>
 </block>
 <block name="content">
+
     <div class="row">
         <div class="col-xs-12">
+            <a type="button" class="btn btn-primary" href="__ROOT__/home/Column/insertColumn">新建项目</a>
             <div class="box">
+
                 <table class="table table-condensed tableColumn">
                     <thead>
                     <tr>
@@ -35,8 +38,8 @@
             <td>{4}</td>
             <td>{5}</td>
             <td>
-                <span class="btnEditable"><a href="EditAd?projId={Key}">编辑</a></span>
-                <span class="btnDisabled disableAd" data-id="{Key}">删除</span>
+                <a class="btn btn-info"  href="EditAd?projId={Key}">编辑</a>
+                <span class="btn btn-danger" data-id="{Key}">删除</span>
             </td>
         </tr>
         </tbody>
@@ -48,12 +51,12 @@
 <block name="script">
     <script src="{$Think.config.WEB_RES_ROOT}js/jqPaginator.js" type="text/javascript"></script>
     <script type="text/javascript">
-        $(function(){
+        $(function () {
             $('#dividePage').jqPaginator({
                 totalPages: 1,
                 visiblePages: 10,
                 currentPage: 1,
-                onPageChange: function(num, type) {
+                onPageChange: function (num, type) {
                     searchData(num);
                 }
             });
@@ -73,7 +76,7 @@
                 timeout: 60 * 60 * 1000,
                 dataType: "json",
                 data: data,
-                success: function(result) {
+                success: function (result) {
                     $("#columnList .columnData").remove();
                     if (result.Data != null && result.Data.length == 0) {
                         $("#columnList").append('<tr class="columnData" height="45"><td colspan="10">没有符合您查询条件的结果</td></tr>');
@@ -100,12 +103,12 @@
                             }
                         }
                         /*【编辑】*/
-                        $("#columnList .disableAd").click(function(event) {
+                        $("#columnList .disableAd").click(function (event) {
                             var _this = $(this);
                             var key = _this.data("id");
                             if (_this.text() != "已作废") {
                                 if (confirm("确定要将序号为" + key + "的数据变为作废吗？被作废的活动不可再恢复，请谨慎操作。")) {
-                                    $.post('/goldeneye/Advert/DeleteAd', { id: key }, function(result) {
+                                    $.post('/goldeneye/Advert/DeleteAd', {id: key}, function (result) {
                                         if (result != null && result.state == '@SlStandardMessage.Success') {
                                             alert(result.message);
                                         } else {
