@@ -9,7 +9,7 @@
             <span>项目名称</span>
         </div>
         <div class="col-sm-6">
-            <input class="form-control" type="text"  placeholder="">
+            <input class="form-control" type="text" placeholder="">
         </div>
     </div>
     <div class="row">
@@ -17,7 +17,7 @@
             <span>文件夹名称</span>
         </div>
         <div class="col-sm-6">
-            <input class="form-control" type="text"  placeholder="">
+            <input class="form-control" type="text" placeholder="">
         </div>
     </div>
     <div class="row">
@@ -25,10 +25,31 @@
             <span>栏目排序</span>
         </div>
         <div class="col-sm-6">
-            <input class="form-control" type="text"  placeholder="">
+            <input class="form-control" type="text" placeholder="">
         </div>
     </div>
+    <div class="row">
+        <div class="col-xs-3 text-right">
+            <span>新窗口打开</span>
+        </div>
+        <div class="col-sm-6">
+            <input type="radio" name="IsNewWindow" value="0">否
+            <input type="radio" name="IsNewWindow" value="1">是
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-3 text-right">
+            <span>位置</span>
+        </div>
+        <div class="col-sm-6">
+            <select class="form-control">
+                <option value="0">不显示</option>
+                <option value="1">头部</option>
+                <option value="2">底部</option>
+            </select>
 
+        </div>
+    </div>
 </block>
 <block name="script">
     <script type="text/javascript">
